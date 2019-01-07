@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
+import Trip from './Trip';
 
-class App extends Component {
+export default class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            currentTrip: null
+            currentTrip: { sections: [] }
             , mediaList: []
-            , tripList: []
+            , tripList: props.tripList || []
         };
     }
 
-    render() {
-        return <h1>{this.props.title}</h1>;
-    }
-}
+    onUpdateTripSections(tripSections) {
+        if (!Array.isArray(tripSections)) {
+            // eslint-disable-next-line
+            tripSections = [...tripSections];
+        }
 
-export default App;
+        this.setState(({ currentTrip }) => {
+            currentTrip.sections = tripSections;
+            return { currentTrip };
+        });
+    }
+
+    render() {
+        return <>
+            <h1>{this.props.title}</h1>
+            {this.state.tripList.map((item, key) => <Trip key={key} {...item} />)}
+            </>;
+    }
+};
