@@ -5,7 +5,7 @@ export default [
             {
                 id: 0
                 , content: [ 'Flight 1', 'to Malle' ]
-                , media: [
+                , mediaList: [
                     {
                         type: 'img'
                         , src: 'https://dummyimage.com/400x300/757575/fff&text=Flight1'
@@ -18,11 +18,16 @@ export default [
             }
             , {
                 id: 1
-                , content: ['string 1', 'string 2']
-                , media: [
+                , content: [ 'string 1', 'string 2' ]
+                , mediaList: [
                     {
                         type: 'img'
                         , src: 'https://dummyimage.com/400x300/757575/fff&text=Planet_Earth'
+                        , description: 'Image description goes here. Maybe with a second line'
+                    }
+                    , {
+                        type: 'img'
+                        , src: 'https://dummyimage.com/400x300/757575/fff&text=Planet_Earth2'
                         , description: 'Image description goes here. Maybe with a second line'
                     }
                 ]
@@ -36,7 +41,7 @@ export default [
                     , 'Am Ballermann'
                     , 'Nur 3m vom Strand entfernt.'
                 ]
-                , media: [
+                , mediaList: [
                     {
                         type: 'img'
                         , src: 'https://dummyimage.com/400x300/757575/fff&text=Hotel1'
@@ -54,7 +59,7 @@ export default [
             , {
                 id: 3
                 , content: [ 'Flight 2', 'to Frankfurt' ]
-                , media: [
+                , mediaList: [
                     {
                         type: 'img'
                         , src: 'https://dummyimage.com/400x300/757575/fff&text=Flight2'
