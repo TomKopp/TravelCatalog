@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Toolbar from '@material-ui/core/Toolbar';
 import Trip from './Trip';
+import Typography from '@material-ui/core/Typography';
 
 export default class App extends Component {
     constructor(props) {
@@ -26,8 +30,13 @@ export default class App extends Component {
 
     render() {
         return <>
-            <h1>{this.props.title}</h1>
-            {this.state.tripList.map((item, key) => <Trip key={key} {...item} />)}
+            <CssBaseline />
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" color="inherit">{this.props.title}</Typography>
+                </Toolbar>
+            </AppBar>
+            {this.state.tripList.map((el, key) => <Trip key={key} {...el} />)}
             </>;
     }
 };

@@ -15,6 +15,6 @@ export default ({ content, mediaList, location, rating }) => {
         <h1>{contentFirst}</h1>
         {rating && <b className="rating">Rating: {rating}</b>}
         {location && <p className="location">{location}</p>}
-        {contentRest && <p className="content">{contentRest.map((item, key) => <span key={key}>{item}</span>)}</p>}
+        {contentRest && <p className="content">{contentRest.map((el, key) => <span key={key}>{el}</span>)}</p>}
     </section>;
 };
