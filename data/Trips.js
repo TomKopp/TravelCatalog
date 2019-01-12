@@ -1,6 +1,7 @@
 export default [
     {
         id: 0
+        , title: 'Holliday at Mallorca'
         , sections: [
             {
                 id: 0
@@ -18,7 +19,7 @@ export default [
             }
             , {
                 id: 1
-                , content: [ 'string 1', 'string 2' ]
+                , content: ['string 1']
                 , mediaList: [
                     {
                         type: 'img'
