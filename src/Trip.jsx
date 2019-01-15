@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 import MediaList from './MediaList';
 import Paper from '@material-ui/core/Paper';
-import TripSection from './TripSection';
+import Typography from '@material-ui/core/Typography';
 
 export default class Trip extends Component {
     constructor(props) {
@@ -23,15 +25,23 @@ export default class Trip extends Component {
     }
 
     render() {
-        return <article className="trip">
-            <MediaList children={this.state.mediaList} />
-            <h1>{this.state.title}</h1>
-            <p>
-                {this.state.accomodation && <span>{this.state.accomodation}</span>}
-                {this.state.journeyOut && <span>Journey Out: {this.state.journeyOut.date.toDateString()}</span>}
-                {this.state.journeyBack && <span>Journey Back: {this.state.journeyBack.date.toDateString()}</span>}
-            </p>
-            {this.state.sectionList.map((el, key) => <TripSection key={key} {...el} />)}
-        </article>;
+        return <Paper className="trip" component="article">
+            <Grid container>
+                <Grid item xs={12} sm={5}>
+                    <MediaList children={this.state.mediaList} />
+                </Grid>
+                <Grid item container direction="column" xs={12} sm={7} className="trip-summary">
+                    <Grid item>
+                        <Typography gutterBottom variant="h5" component="h2">{this.state.title}</Typography>
+                        {this.state.accomodation && <Typography gutterBottom>{this.state.accomodation}</Typography>}
+                        {this.state.journeyOut && <Typography gutterBottom>{this.state.journeyOut.date.toDateString()}</Typography>}
+                        {this.state.journeyBack && <Typography gutterBottom>{this.state.journeyBack.date.toDateString()}</Typography>}
+                    </Grid>
+                    <Grid item container justify="flex-end">
+                        <Button variant="outlined" color="primary">Details</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Paper>;
     }
 }
