@@ -69,7 +69,7 @@ export default [
                 ]
                 , location: 'Malle'
                 , rating: 3
-                , transportation: { date: new Date() }
+                , transport: { date: new Date() }
             }
         ]
     }
@@ -89,7 +89,7 @@ export default [
                 ]
                 , location: 'Frankfurt'
                 , rating: 2
-                , transportation: { date: new Date() }
+                , transport: { date: new Date() }
             }
             , {
                 id: 1
@@ -143,7 +143,7 @@ export default [
                 ]
                 , location: 'Malle'
                 , rating: 3
-                , transportation: { date: new Date() }
+                , transport: { date: new Date() }
             }
         ]
     }
