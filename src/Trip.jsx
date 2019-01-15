@@ -10,16 +10,16 @@ export default class Trip extends Component {
         super(props);
 
         const sectionList = props.sections || [];
-        const [ journeyOut, ...transportationList ] = sectionList.filter((el) => Boolean(el.transportation));
-        const journeyBack = transportationList.pop();
+        const [ journeyOut, ...transportList ] = sectionList.filter((el) => Boolean(el.transport));
+        const journeyBack = transportList.pop();
 
         this.state = {
             id: props.id || null
             , title: props.title || 'Generic Title'
             , sectionList
             , mediaList: sectionList.reduce((carry, el) => carry.concat(el.mediaList), [])
-            , journeyOut: journeyOut.transportation
-            , journeyBack: journeyBack.transportation
+            , journeyOut: journeyOut.transport
+            , journeyBack: journeyBack.transport
             , accomodation: null
         };
     }
