@@ -39,7 +39,7 @@ export default class App extends Component {
             </AppBar>
             <div style={{ padding: '16px' }}>
                 <Grid container spacing={16}>
-                    {this.state.tripList.map((el, key) => <Grid key={key} item><Trip {...el} /></Grid>)}
+                    {this.state.tripList.map((el, key) => <Grid key={key} item className="app-grid-item"><Trip {...el} /></Grid>)}
                 </Grid>
             </div>
             </>;

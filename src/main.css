@@ -6,9 +6,13 @@ body {
     padding: 0;
 } */
 
-/* .trip {
-    max-width: 500px;
-} */
+.app-grid-item {
+    width: 100%;
+}
+
+.trip {
+    width: 100%;
+}
 
 .trip-summary {
     padding: 16px;
@@ -19,13 +23,13 @@ body {
     scroll-snap-type: x mandatory;
 }
 
-.media-obj {
+.media-list-tile {
     scroll-snap-align: center;
     /* flex: 1 1 auto; */
     /* min-width: 100%; */
-    padding: 2px;
+    /* padding: 2px; */
 }
 
-.media-obj-media {
-    display: flex;
+.media-list-tile-media {
+    display: block;
 }
