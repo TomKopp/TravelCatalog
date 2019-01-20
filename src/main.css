@@ -8,6 +8,7 @@ body {
 
 .app-grid-item {
     width: 100%;
+    /* flex: 1 1 100%; */
 }
 
 .trip {
@@ -25,6 +26,7 @@ body {
 
 .media-list-tile {
     scroll-snap-align: center;
+    max-height: 20em;
     /* flex: 1 1 auto; */
     /* min-width: 100%; */
     /* padding: 2px; */
