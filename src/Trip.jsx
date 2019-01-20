@@ -10,7 +10,7 @@ export default class Trip extends Component {
         super(props);
 
         const sectionList = props.sections || [];
-        const [ journeyOut, ...transportList ] = sectionList.filter((el) => Boolean(el.transport));
+        const [journeyOut, ...transportList] = sectionList.filter((el) => Boolean(el.transport));
         const journeyBack = transportList.pop();
 
         this.state = {
@@ -18,9 +18,9 @@ export default class Trip extends Component {
             , title: props.title || 'Generic Title'
             , sectionList
             , mediaList: sectionList.reduce((carry, el) => carry.concat(el.mediaList), [])
-            , journeyOut: journeyOut.transport
-            , journeyBack: journeyBack.transport
-            , accomodation: null
+            , journeyOut
+            , journeyBack
+            , hotel: null
         };
     }
 
@@ -32,13 +32,13 @@ export default class Trip extends Component {
                 </Grid>
                 <Grid item container direction="column" xs={12} sm={7} className="trip-summary">
                     <Grid item>
-                        <Typography gutterBottom variant="h5" component="h2">{this.state.title}</Typography>
-                        {this.state.accomodation && <Typography gutterBottom>{this.state.accomodation}</Typography>}
-                        {this.state.journeyOut && <Typography gutterBottom>{this.state.journeyOut.date.toDateString()}</Typography>}
-                        {this.state.journeyBack && <Typography gutterBottom>{this.state.journeyBack.date.toDateString()}</Typography>}
+                        <Typography gutterBottom variant="h4" component="h1">{this.state.title}</Typography>
+                        {this.state.hotel && <Typography gutterBottom>{this.state.hotel}</Typography>}
+                        {this.state.journeyOut && <Typography gutterBottom>{this.state.journeyOut.startDate.toDateString()}</Typography>}
+                        {this.state.journeyBack && <Typography gutterBottom>{this.state.journeyBack.startDate.toDateString()}</Typography>}
                     </Grid>
                     <Grid item container justify="flex-end">
-                        <Button variant="outlined" color="primary">Details</Button>
+                        <Button variant="contained" color="primary">Get Details</Button>
                     </Grid>
                 </Grid>
             </Grid>

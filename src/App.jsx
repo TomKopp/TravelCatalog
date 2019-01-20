@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
+import { Button } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MenuItem from '@material-ui/core/MenuItem';
+import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
+import Today from '@material-ui/icons/Today';
 import Toolbar from '@material-ui/core/Toolbar';
 import Trip from './Trip';
 import Typography from '@material-ui/core/Typography';
@@ -10,10 +16,34 @@ export default class App extends Component {
     constructor(props) {
         super(props);
 
+        this.sortBy = [
+            { value: '', label: 'None' }
+            , { value: 'price', label: 'Price' }
+            , { value: 'rating', label: 'Rating' }
+        ];
+        this.ratings = [
+            { value: '', label: 'None' }
+            , { value: '1+', label: '1+' }
+            , { value: '2+', label: '2+' }
+            , { value: '3+', label: '3+' }
+            , { value: '4+', label: '4+' }
+            , { value: '5', label: '5' }
+        ];
+
         this.state = {
             currentTrip: { sections: [] }
             , mediaList: []
             , tripList: props.tripList || []
+            , sortBy: ''
+            , rating: ''
+        };
+    }
+
+    // eslint-disable-next-line
+    // handleChange = (name) => (event) => this.setState({ [name]: event.target.value });
+    handleChange(name) {
+        return function HC(event) {
+            this.setState({ [name]: event.target.value });
         };
     }
 
@@ -39,6 +69,23 @@ export default class App extends Component {
             </AppBar>
             <div style={{ padding: '16px' }}>
                 <Grid container spacing={16}>
+                    <Grid item className="app-grid-item app-search">
+                        <Paper style={{ padding: '16px' }}>
+                            <Grid container spacing={16} alignItems="center">
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Origin" type="search" margin="normal" variant="outlined" fullWidth /></Grid>
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Destination" type="search" margin="normal" variant="outlined" fullWidth /></Grid>
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Departing" type="date" margin="normal" variant="outlined" fullWidth InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Returning" type="date" margin="normal" variant="outlined" fullWidth InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
+                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Rating" select margin="normal" variant="outlined" fullWidth value={this.state.rating} onChange={this.handleChange('rating').bind(this)}>
+                                    {this.ratings.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
+                                </TextField></Grid>
+                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Sort By" select margin="normal" variant="outlined" fullWidth value={this.state.sortBy} onChange={this.handleChange('sortBy').bind(this)}>
+                                    {this.sortBy.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
+                                </TextField></Grid>
+                                <Grid item container justify="flex-end" style={{ flex: '1 1 33.33%' }}><Button color="primary" variant="contained" size="large">Search</Button></Grid>
+                            </Grid>
+                        </Paper>
+                    </Grid>
                     {this.state.tripList.map((el, key) => <Grid key={key} item className="app-grid-item"><Trip {...el} /></Grid>)}
                 </Grid>
             </div>
