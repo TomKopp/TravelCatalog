@@ -12,10 +12,7 @@ module.exports = {
         "array-bracket-newline": "error",
         "array-bracket-spacing": [
             "error",
-            "always",
-            {
-                "singleValue": false
-            }
+            "never"
         ],
         "array-callback-return": "error",
         "array-element-newline": [
