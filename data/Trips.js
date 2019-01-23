@@ -6,6 +6,7 @@ export default [
         , sender: 'HotelDetails'
         , startDate: new Date('2019-01-15T13:53:25.836Z')
         , endDate: new Date('2019-01-15T13:53:25.836Z')
+        , rating: 3
         , sections: [
             {
                 id: 0
@@ -252,6 +253,7 @@ export default [
         , sender: 'HotelDetails'
         , startDate: new Date('2019-01-15T13:53:25.836Z')
         , endDate: new Date('2019-01-15T13:53:25.836Z')
+        , rating: 4
         , sections: [
             {
                 id: 0

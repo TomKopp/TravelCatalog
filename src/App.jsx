@@ -22,12 +22,12 @@ export default class App extends Component {
             , { value: 'rating', label: 'Rating' }
         ];
         this.ratings = [
-            { value: '', label: 'None' }
-            , { value: '1+', label: '1+' }
-            , { value: '2+', label: '2+' }
-            , { value: '3+', label: '3+' }
-            , { value: '4+', label: '4+' }
-            , { value: '5', label: '5' }
+            { value: 0, label: 'All' }
+            , { value: 1, label: '1+' }
+            , { value: 2, label: '2+' }
+            , { value: 3, label: '3+' }
+            , { value: 4, label: '4+' }
+            , { value: 5, label: '5' }
         ];
 
         this.state = {
@@ -35,16 +35,20 @@ export default class App extends Component {
             , mediaList: []
             , tripList: props.tripList || []
             , sortBy: ''
-            , rating: ''
+            , rating: 0
+            , arrival: ''
+            , departure: ''
+            , destination: ''
         };
     }
 
-    // eslint-disable-next-line
-    // handleChange = (name) => (event) => this.setState({ [name]: event.target.value });
+
+    filterTrip({ rating, arrival, departure, destination }) {
+        return (el) => 'rating' in el && el.rating > rating;
+    }
+
     handleChange(name) {
-        return function HC(event) {
-            this.setState({ [name]: event.target.value });
-        };
+        return (event) => this.setState({ [name]: event.target.value });
     }
 
     onUpdateTripSections(tripSections) {
@@ -69,24 +73,25 @@ export default class App extends Component {
             </AppBar>
             <div style={{ padding: '16px' }}>
                 <Grid container spacing={16}>
-                    <Grid item className="app-grid-item app-search">
+                    <Grid item className="app-grid-item app-filter">
                         <Paper style={{ padding: '16px' }}>
                             <Grid container spacing={16} alignItems="center">
-                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Origin" type="search" margin="normal" variant="outlined" fullWidth /></Grid>
-                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Destination" type="search" margin="normal" variant="outlined" fullWidth /></Grid>
-                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Departing" type="date" margin="normal" variant="outlined" fullWidth InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
-                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Returning" type="date" margin="normal" variant="outlined" fullWidth InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
-                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Rating" select margin="normal" variant="outlined" fullWidth value={this.state.rating} onChange={this.handleChange('rating').bind(this)}>
+                                <Grid item style={{ flex: '1 1 100%', minWidth: '17em' }}><TextField label="Destination" name="destination" type="search" margin="normal" variant="outlined" fullWidth onChange={this.handleChange('destination')} /></Grid>
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Arrival" name="arrival" type="date" margin="normal" variant="outlined" fullWidth onChange={this.handleChange('arrival')} InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
+                                <Grid item style={{ flex: '1 1 50%', minWidth: '17em' }}><TextField label="Departure" name="departure" type="date" margin="normal" variant="outlined" fullWidth onChange={this.handleChange('departure')} InputLabelProps={{ shrink: true }} InputProps={{ startAdornment: <InputAdornment position="start"><Today /></InputAdornment> }} /></Grid>
+                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Rating" select margin="normal" variant="outlined" fullWidth value={this.state.rating} onChange={this.handleChange('rating')}>
                                     {this.ratings.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
                                 </TextField></Grid>
-                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Sort By" select margin="normal" variant="outlined" fullWidth value={this.state.sortBy} onChange={this.handleChange('sortBy').bind(this)}>
+                                <Grid item style={{ flex: '1 1 33.33%' }}><TextField label="Sort By" select margin="normal" variant="outlined" fullWidth value={this.state.sortBy} onChange={this.handleChange('sortBy')}>
                                     {this.sortBy.map(({ value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
                                 </TextField></Grid>
-                                <Grid item container justify="flex-end" style={{ flex: '1 1 33.33%' }}><Button color="primary" variant="contained" size="large">Search</Button></Grid>
+                                <Grid item container justify="flex-end" style={{ flex: '1 1 33.33%' }}><Button color="primary" variant="contained" size="large">Search/Filter</Button></Grid>
                             </Grid>
                         </Paper>
                     </Grid>
-                    {this.state.tripList.map((el, key) => <Grid key={key} item className="app-grid-item"><Trip {...el} /></Grid>)}
+                    {this.state.tripList
+                        .filter(this.filterTrip(this.state))
+                        .map((el, key) => <Grid key={key} item className="app-grid-item"><Trip {...el} /></Grid>)}
                 </Grid>
             </div>
             </>;
