@@ -1,16 +1,7 @@
+import { AppBar, Button, CssBaseline, Grid, InputAdornment, MenuItem, Paper, TextField, Toolbar, Typography } from '@material-ui/core';
 import React, { Component } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import { Button } from '@material-ui/core';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import Today from '@material-ui/icons/Today';
-import Toolbar from '@material-ui/core/Toolbar';
 import Trip from './Trip';
-import Typography from '@material-ui/core/Typography';
 
 export default class App extends Component {
     constructor(props) {

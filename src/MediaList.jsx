@@ -1,6 +1,4 @@
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import { GridList, GridListTile, GridListTileBar } from '@material-ui/core';
 import React from 'react';
 
 export default ({ children }) => <GridList className="media-list" cols={1} cellHeight={'auto'}>
