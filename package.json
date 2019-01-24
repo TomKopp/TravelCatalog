@@ -38,5 +38,8 @@
     "webpack": "^4.28.3",
     "webpack-cli": "^3.2.0",
     "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "tripslist": "gist:8bd6f95ed42319c57c21dd60eca7f044"
   }
 }
