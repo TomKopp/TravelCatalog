@@ -2,7 +2,7 @@ import './main.css';
 import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Trips from './../data/Trips';
+import Trips from 'tripslist';
 
 window.addEventListener(
     'load',
