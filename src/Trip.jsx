@@ -1,30 +1,30 @@
+import { Button, Grid, Paper, Typography } from '@material-ui/core';
+import { FlightLand, FlightTakeoff, Hotel, Star } from '@material-ui/icons';
 import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 import MediaList from './MediaList';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 
 export default class Trip extends Component {
+
     constructor(props) {
         super(props);
 
         const sectionList = props.sections || [];
-        const [journeyOut, ...transportList] = sectionList.filter((el) => Boolean(el.transport));
-        const journeyBack = transportList.pop();
+        const sectionHotel = sectionList.find((el) => Boolean(el.hotel));
 
         this.state = {
             id: props.id || null
             , title: props.title || 'Generic Title'
             , sectionList
             , mediaList: sectionList.reduce((carry, el) => carry.concat(el.mediaList), [])
-            , journeyOut
-            , journeyBack
-            , hotel: null
+            , startDate: props.startDate
+            , endDate: props.endDate
+            , rating: props.rating
+            , hotel: sectionHotel ? sectionHotel.hotel : null
         };
     }
 
     render() {
+        console.log(this.state.hotel);
         return <Paper className="trip" component="article">
             <Grid container>
                 <Grid item xs={12} sm={5}>
@@ -33,9 +33,10 @@ export default class Trip extends Component {
                 <Grid item container direction="column" xs={12} sm={7} className="trip-summary">
                     <Grid item>
                         <Typography gutterBottom variant="h4" component="h1">{this.state.title}</Typography>
-                        {this.state.hotel && <Typography gutterBottom>{this.state.hotel}</Typography>}
-                        {this.state.journeyOut && <Typography gutterBottom>{this.state.journeyOut.startDate.toDateString()}</Typography>}
-                        {this.state.journeyBack && <Typography gutterBottom>{this.state.journeyBack.startDate.toDateString()}</Typography>}
+                        {this.state.startDate && <Typography gutterBottom><FlightTakeoff />{this.state.startDate.toDateString()}</Typography>}
+                        {this.state.endDate && <Typography gutterBottom><FlightLand />{this.state.endDate.toDateString()}</Typography>}
+                        {this.state.hotel && <Typography gutterBottom><Hotel />{this.state.hotel.name}</Typography>}
+                        {this.state.rating && <Typography gutterBottom><Star /> Rating: {this.state.rating}</Typography>}
                     </Grid>
                     <Grid item container justify="flex-end">
                         <Button variant="contained" color="primary">Get Details</Button>
