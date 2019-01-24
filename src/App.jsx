@@ -91,7 +91,7 @@ export default class App extends Component {
                     </Grid>
                     {this.state.tripList
                         .filter(this.filterTrip(this.state))
-                        .map((el, key) => <Grid key={key} item className="app-grid-item"><Trip {...el} /></Grid>)}
+                        .map((el) => <Grid key={el.id} item className="app-grid-item"><Trip {...el} /></Grid>)}
                 </Grid>
             </div>
             </>;
