@@ -39,7 +39,7 @@ export default class Trip extends Component {
                         {this.state.rating && <Typography gutterBottom><Star /> Rating: {this.state.rating}</Typography>}
                     </Grid>
                     <Grid item container justify="flex-end">
-                        <Button variant="contained" color="primary">Get Details</Button>
+                        <Button variant="contained" color="primary">Activate Details</Button>
                     </Grid>
                 </Grid>
             </Grid>
