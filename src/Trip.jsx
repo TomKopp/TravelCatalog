@@ -24,7 +24,6 @@ export default class Trip extends Component {
     }
 
     render() {
-        console.log(this.state.hotel);
         return <Paper className="trip" component="article">
             <Grid container>
                 <Grid item xs={12} sm={5}>
