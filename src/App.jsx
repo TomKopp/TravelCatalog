@@ -23,7 +23,6 @@ export default class App extends Component {
 
         this.state = {
             currentTrip: { sections: [] }
-            , mediaList: []
             , tripList: props.tripList || []
             , sortBy: ''
             , rating: 0
