@@ -6,16 +6,12 @@ body {
     padding: 0;
 } */
 
-.app-grid-item {
-    width: 100%;
-    /* flex: 1 1 100%; */
+.app-filter {
+    padding: 16px;
 }
 
 .trip {
-    width: 100%;
-}
-
-.trip-summary {
+    margin-top: 24px;
     padding: 16px;
 }
 
