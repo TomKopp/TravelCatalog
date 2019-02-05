@@ -4,10 +4,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Trips from 'tripslist';
 
-window.addEventListener(
-    'load',
-    () => ReactDOM.render(<App title={document.title} tripList={Trips} />, document.getElementById('root'))
-);
+window.TravelCatalogRender = function TravelCatalogRender(DomNode) {
+    ReactDOM.render(<App title={document.title} tripList={Trips} />, DomNode);
+};
 
 // window.addEventListener(
 //     'load',
