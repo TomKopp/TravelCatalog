@@ -21,6 +21,8 @@ export default class App extends Component {
             , { value: 5, label: '5' }
         ];
 
+        this.travalCatalog = props.travalCatalog;
+
         this.state = {
             currentTrip: { sections: [] }
             , tripList: props.tripList || []
@@ -41,24 +43,24 @@ export default class App extends Component {
         return (event) => this.setState({ [name]: event.target.value });
     }
 
-    onUpdateTripSections(tripSections) {
-        if (!Array.isArray(tripSections)) {
-            // eslint-disable-next-line
-            tripSections = [...tripSections];
-        }
+    // onUpdateTripSections(tripSections) {
+    //     if (!Array.isArray(tripSections)) {
+    //         // eslint-disable-next-line
+    //         tripSections = [...tripSections];
+    //     }
 
-        this.setState(({ currentTrip }) => {
-            currentTrip.sections = tripSections;
-            return { currentTrip };
-        });
-    }
+    //     this.setState(({ currentTrip }) => {
+    //         currentTrip.sections = tripSections;
+    //         return { currentTrip };
+    //     });
+    // }
 
     render() {
         return <>
             <CssBaseline />
             <AppBar position="static">
                 <Toolbar>
-                    <Typography component="h1" variant="h6" color="inherit">{this.props.title}</Typography>
+                    <Typography component="h1" variant="h6" color="inherit">{this.travalCatalog.title}</Typography>
                 </Toolbar>
             </AppBar>
             <div style={{ padding: '16px' }}>
