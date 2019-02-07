@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,18 @@
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <script src="../dist/TravelCatalog.js"></script>
 </head>
+
 <body>
     <div id="root"></div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <script>window.TravelCatalogRender(document.getElementById('root'))</script>
+    <script>
+        window.TravelCatalogRender(
+            {
+                title: document.title
+                , _renderTargetId: 'root'
+            }
+        )
+    </script>
 </body>
+
 </html>
