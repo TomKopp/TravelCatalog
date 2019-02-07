@@ -36,7 +36,7 @@ export default class App extends Component {
 
 
     filterTrip({ rating, arrival, departure, destination }) {
-        return (el) => 'rating' in el && el.rating > rating;
+        return (el) => 'rating' in el && el.rating >= rating;
     }
 
     handleChange(name) {
