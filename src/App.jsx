@@ -21,7 +21,7 @@ export default class App extends Component {
             , { value: 5, label: '5' }
         ];
 
-        this.travalCatalog = props.travalCatalog;
+        this.travelCatalog = props.travelCatalog;
 
         this.state = {
             currentTrip: { sections: [] }
@@ -60,7 +60,7 @@ export default class App extends Component {
             <CssBaseline />
             <AppBar position="static">
                 <Toolbar>
-                    <Typography component="h1" variant="h6" color="inherit">{this.travalCatalog.title}</Typography>
+                    <Typography component="h1" variant="h6" color="inherit">{this.travelCatalog.title}</Typography>
                 </Toolbar>
             </AppBar>
             <div style={{ padding: '16px' }}>
