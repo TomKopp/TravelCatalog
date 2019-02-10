@@ -12,8 +12,3 @@ window.TravelCatalogRender = function TravelCatalogRender(DocumaComponentsTravel
         , document.getElementById(DocumaComponentsTravelCatalog._renderTargetId)
     );
 };
-
-// window.addEventListener(
-//     'load',
-//     () => App.onUpdateTripSections()
-// );
