@@ -22,9 +22,10 @@ export default class App extends Component {
         ];
 
         this.travelCatalog = props.travelCatalog;
+        document.addEventListener('onUpdateTripSections', ({ detail: tripSections }) => this.onUpdateTripSections(tripSections));
 
         this.state = {
-            currentTrip: { sections: [] }
+            currentTrip: null
             , tripList: props.tripList || []
             , sortBy: ''
             , rating: 0
@@ -43,17 +44,14 @@ export default class App extends Component {
         return (event) => this.setState({ [name]: event.target.value });
     }
 
-    // onUpdateTripSections(tripSections) {
-    //     if (!Array.isArray(tripSections)) {
-    //         // eslint-disable-next-line
-    //         tripSections = [...tripSections];
-    //     }
+    setCurrentTrip(trip) {
+        this.setState({ currentTrip: trip });
+        document.dispatchEvent(new CustomEvent('updateTripSections', { detail: trip }));
+    }
 
-    //     this.setState(({ currentTrip }) => {
-    //         currentTrip.sections = tripSections;
-    //         return { currentTrip };
-    //     });
-    // }
+    onUpdateTripSections(currentTrip) {
+        this.setState({ currentTrip });
+    }
 
     render() {
         return <>
@@ -63,7 +61,7 @@ export default class App extends Component {
                     <Typography component="h1" variant="h6" color="inherit">{this.travelCatalog.title}</Typography>
                 </Toolbar>
             </AppBar>
-            <div style={{ padding: '16px' }}>
+            <div style={{ padding: '16px', maxWidth: '1050px', margin: 'auto' }}>
                 <Paper className="app-filter">
                     <Grid container spacing={16} alignItems="center">
                         <Grid item style={{ flex: '1 1 100%', minWidth: '17em' }}><TextField label="Destination" name="destination" type="search" margin="normal" variant="outlined" fullWidth onChange={this.handleChange('destination')} /></Grid>
@@ -78,9 +76,10 @@ export default class App extends Component {
                         <Grid item container justify="flex-end" style={{ flex: '1 1 33.33%' }}><Button color="primary" variant="contained" size="large">Search/Filter</Button></Grid>
                     </Grid>
                 </Paper>
+                {this.state.currentTrip && <Trip {...this.state.currentTrip} />}
                 {this.state.tripList
                     .filter(this.filterTrip(this.state))
-                    .map((el) => <Trip key={el.id} {...el} />)}
+                    .map((el) => <Trip key={el.id} {...el} setCurrentTrip={this.setCurrentTrip.bind(this, el)} />)}
             </div>
             </>;
     }

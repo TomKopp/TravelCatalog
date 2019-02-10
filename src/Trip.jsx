@@ -3,38 +3,34 @@ import { FlightLand, FlightTakeoff, Hotel, Star } from '@material-ui/icons';
 import MediaList from './MediaList';
 import React from 'react';
 
-export default (props) => {
-    const sectionList = props.sections || [];
-    const sectionHotel = sectionList.find((el) => Boolean(el.hotel));
-    const mediaList = sectionList.reduce((carry, el) => carry.concat(el.mediaList), []);
-    const title = props.title || 'Generic Title';
-    const hotel = sectionHotel ? sectionHotel.hotel : null;
-    const content = sectionList.find((el) => Boolean(el.content)).content || [];
-    const { startDate, endDate, rating } = props;
+export default ({ title = 'Generic Title', startDate, endDate, rating, sections = [], setCurrentTrip, iscurrentTrip = false }) => {
+    const mediaList = sections
+        .reduce((carry, el) => carry.concat(el.mediaList), []);
+    const hotelsNameList = sections
+        .filter((el) => Boolean(el.hotel))
+        .map((el) => el.hotel.name)
+        .join(', ');
+    const content = sections
+        .find((el) => Boolean(el.content)).content || [];
 
     return <Paper className="trip" component="article">
         <Grid container spacing={16}>
+            {iscurrentTrip && <Grid item xs={12}><Typography gutterBottom variant="h4" component="h1">Your Current Trip</Typography></Grid>}
             <Grid item xs={12} sm={5}>
                 <MediaList children={mediaList} />
             </Grid>
-            <Grid item container direction="column" xs={12} sm={7} className="trip-summary">
-                <Grid item>
-                    <Typography gutterBottom variant="h4" component="h1">{title}</Typography>
-                    <Typography gutterBottom>
-                        {startDate && <span className="ico-string"><FlightTakeoff />{startDate.toDateString()}</span>}
-                        {endDate && <span className="ico-string"><FlightLand />{endDate.toDateString()}</span>}
-                    </Typography>
-                    <Typography gutterBottom>{hotel && <span className="ico-string"><Hotel />{hotel.name}</span>}</Typography>
-                    <Typography gutterBottom>{rating && <span className="ico-string"><Star />Rating: {rating}</span>}</Typography>
-                </Grid>
-                <Grid item>
-                    <Typography gutterBottom>
-                        {content.map((el, id) => <Typography key={id} gutterBottom component="span">{el}</Typography>)}
-                    </Typography>
-                </Grid>
-                <Grid item container justify="flex-end">
-                    <Button variant="contained" color="primary">Activate Details</Button>
-                </Grid>
+            <Grid item container xs={12} sm={7} className="trip-summary">
+                <Grid item xs={12}><Typography gutterBottom variant="h4" component="h1">{title}</Typography></Grid>
+                <Grid item xs={6}><Typography gutterBottom>{startDate && <span className="ico-string"><FlightTakeoff />{startDate.toDateString()}</span>}</Typography></Grid>
+                <Grid item xs={6}><Typography gutterBottom>{endDate && <span className="ico-string"><FlightLand />{endDate.toDateString()}</span>}</Typography></Grid>
+                <Grid item xs={6}><Typography gutterBottom>{hotelsNameList && <span className="ico-string"><Hotel />{hotelsNameList}</span>}</Typography></Grid>
+                <Grid item xs={6}><Typography gutterBottom>{rating && <span className="ico-string"><Star />Rating: {rating}</span>}</Typography></Grid>
+                <Grid item xs={12}><Typography gutterBottom>
+                    {content.map((el, key) => <Typography key={key} gutterBottom component="span">{el}</Typography>)}
+                </Typography></Grid>
+                {setCurrentTrip && <Grid item xs={12} container justify="flex-end">
+                    <Button variant="contained" color="primary" onClick={setCurrentTrip}>Activate Details</Button>
+                </Grid>}
             </Grid>
         </Grid>
     </Paper>;
