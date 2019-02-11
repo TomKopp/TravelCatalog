@@ -22,7 +22,7 @@ export default class App extends Component {
         ];
 
         this.travelCatalog = props.travelCatalog;
-        document.addEventListener('onUpdateTripSections', ({ detail: tripSections }) => this.onUpdateTripSections(tripSections));
+        document.addEventListener('onUpdateTripSections', ({ detail: trip }) => this.onUpdateTripSections(trip));
 
         this.state = {
             currentTrip: null
