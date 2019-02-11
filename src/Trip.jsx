@@ -3,7 +3,7 @@ import { FlightLand, FlightTakeoff, Hotel, Star } from '@material-ui/icons';
 import MediaList from './MediaList';
 import React from 'react';
 
-export default ({ title = 'Generic Title', startDate, endDate, rating, sections = [], setCurrentTrip, iscurrentTrip = false }) => {
+export default ({ title = 'Generic Title', startDate, endDate, rating, sections = [], setCurrentTrip }) => {
     const mediaList = sections
         .reduce((carry, el) => carry.concat(el.mediaList), []);
     const hotelsNameList = sections
@@ -17,7 +17,7 @@ export default ({ title = 'Generic Title', startDate, endDate, rating, sections 
 
     return <Paper className="trip" component="article">
         <Grid container spacing={16}>
-            {iscurrentTrip && <Grid item xs={12}><Typography gutterBottom variant="h4" component="h1">Your Current Trip</Typography></Grid>}
+            {!setCurrentTrip && <Grid item xs={12}><Typography gutterBottom variant="h4" component="h1">Your Current Trip</Typography></Grid>}
             <Grid item xs={12} sm={5}>
                 <MediaList children={mediaList} />
             </Grid>
